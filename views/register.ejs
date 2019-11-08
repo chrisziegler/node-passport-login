@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="/css/style.css"
+    rel="stylesheet"
+    type="text/css">
+  <title>Auth App | Register</title>
+</head>
+
+<body>
+  <header class="auth-form-header">
+    <h1>Register</h1>
+  </header>
+
+  <form action="/register"
+    method="POST"
+    class="auth-form">
+    <div class="form-row">
+      <label for="name">Name</label>
+      <input type="text"
+        id="name"
+        name="name"
+        required>
+    </div>
+    <div class="form-row">
+      <label for="email">Email</label>
+      <input type="text"
+        id="email"
+        name="email"
+        required>
+      <small>We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-row">
+      <label for="password">Password</label>
+      <input type="text"
+        id="password"
+        name="password"
+        required>
+      <button type="submit"
+        class="form-button">Register</button>
+    </div>
+
+  </form>
+  <a href="/login">Login</a>
+
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="/css/style.css"
+    rel="stylesheet"
+    type="text/css">
+  <title>Auth App | Login</title>
+</head>
+
+<body>
+  <header class="auth-form-header">
+    <h1>Login</h1>
+  </header>
+  <form action="/login"
+    method="POST"
+    class="auth-form">
+    <div class="form-row alert">
+      <% if (messages.error) { %>
+      <%= messages.error %>
+      <% } %>
+    </div>
+    <div class="form-row">
+      <label for="email">Email</label>
+      <input type="text"
+        id="email"
+        name="email"
+        required>
+    </div>
+    <div class="form-row">
+      <label for="password">Password</label>
+      <input type="text"
+        id="password"
+        name="password"
+        required>
+      <button type="submit"
+        class="form-button">Login</button>
+    </div>
+  </form>
+  <a href="/register">Register</a>
+
+
+</body>
+
+</html>
