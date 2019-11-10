@@ -10,6 +10,8 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 
+const PORT = process.env.PORT || 3000;
+
 let localStorage;
 if (typeof localStorage === 'undefined' || localStorage === null) {
   const LocalStorage = require('node-localstorage').LocalStorage;
@@ -37,18 +39,22 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-// for requests from clients that only natively support simple verbs like GET and POST
+// we override the post method in our form so we can use a delete
+// method to work with passports req.logOut() method
 app.use(methodOverride('_method'));
 
+// ROOT GET ROUTE - change to member route, add unauthenticated splash root
 app.get('/', checkAuthenticated, (req, res) => {
   // req.user.name provided by Passport only on authentication
   res.render('index.ejs', { name: req.user.name });
 });
 
+// LOGIN GET ROUTE - only if not logged in
 app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login.ejs');
 });
 
+// LOGIN POST ROUTE - only if not logged in
 app.post(
   '/login',
   checkNotAuthenticated,
@@ -59,10 +65,12 @@ app.post(
   }),
 );
 
+// REGISTER GET ROUTE - only if not logged in
 app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register.ejs');
 });
 
+// REGISTER POST ROUTE - only if not logged in
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -81,6 +89,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
   }
 });
 
+// LOGOUT DELETE ROUTE
 app.delete('/logout', (req, res) => {
   req.logOut();
   res.redirect('/login');
@@ -101,4 +110,4 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-app.listen(3000);
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
