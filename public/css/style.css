@@ -98,6 +98,11 @@ button.form-button {
   cursor: pointer;
 }
 
+button.form-button.white {
+  background: #fff;
+  color: rgb(71, 84, 195);
+}
+
 button.form-button:hover,
 button.form-button:focus {
   background: orange;
@@ -106,6 +111,10 @@ button.form-button:focus {
 
 button.form-button:active {
   transform: scale(0.96);
+}
+
+a {
+  text-decoration: none;
 }
 .alert {
   position: absolute;

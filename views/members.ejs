@@ -11,12 +11,17 @@
 
 <body>
   <header class="auth-form-header">
-    <h1>Welcome!</h1>
-    <nav><a href="/login"><button class="form-button white">Login</button></a>&nbsp;<a
-        href="/register"><button class="form-button white">Register</button></a></nav>
+    <h1>Hi <%= name %>!</h1>
+    <!-- we override the post method so we can use a delete
+    route to work with passports req.logOut() method -->
+    <form action="/logout?_method=delete"
+      method="POST">
+      <button type="submit"
+        class="form-button">Logout</button>
+    </form>
   </header>
   <main>
-    <h3>Splash Page, Register and/or Login to go to Members area</h3>
+    <h3>Page that changes whether you're logged in</h3>
     <br>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam earum voluptatum libero
       blanditiis maiores, quia architecto molestias expedita velit, dolorem ex nesciunt debitis quod odit

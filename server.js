@@ -43,10 +43,16 @@ app.use(passport.session());
 // method to work with passports req.logOut() method
 app.use(methodOverride('_method'));
 
-// ROOT GET ROUTE - change to member route, add unauthenticated splash root
-app.get('/', checkAuthenticated, (req, res) => {
+// ROOT GET ROUTE - changed to member routes
+app.get('/', checkNotAuthenticated, (req, res) => {
   // req.user.name provided by Passport only on authentication
-  res.render('index.ejs', { name: req.user.name });
+  res.render('index.ejs');
+});
+
+// MEMBERS GET ROUTE
+app.get('/members', checkAuthenticated, (req, res) => {
+  // req.user.name provided by Passport only on authentication
+  res.render('members.ejs', { name: req.user.name });
 });
 
 // LOGIN GET ROUTE - only if not logged in
@@ -59,7 +65,7 @@ app.post(
   '/login',
   checkNotAuthenticated,
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/members',
     failureRedirect: '/login',
     failureFlash: true,
   }),
@@ -92,7 +98,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 // LOGOUT DELETE ROUTE
 app.delete('/logout', (req, res) => {
   req.logOut();
-  res.redirect('/login');
+  res.redirect('/');
 });
 
 function checkAuthenticated(req, res, next) {
