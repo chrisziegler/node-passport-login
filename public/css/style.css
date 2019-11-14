@@ -109,7 +109,12 @@ button.form-button {
 button.form-button:hover,
 button.form-button:focus {
   background: orange;
+  outline: 2px solid orange;
+  outline-offset: 5px;
   color: white;
+}
+::-moz-focus-inner {
+  border: 0;
 }
 button.form-button:active {
   transform: scale(0.96);
